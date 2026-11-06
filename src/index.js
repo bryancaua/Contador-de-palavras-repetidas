@@ -5,7 +5,6 @@ const link = archivePath[2];
 
 fs.readFile(link, 'utf-8', (error, text) => {
     paragraphsBreak(text);
-    //wordRepeatVerifier(text);
 })
 
 // isso aqui é uma regex ou Expressões regulares -> /[.,\/#!$%\^&\*;:{}=\-_`~()]/g pega tudo que tiver englobando dentro do /[]/ e o -> g significa global, ou seja aplicar em TUDO do que a gente estiver passando.
@@ -16,9 +15,10 @@ function wordsCleaner(text) {
 
 function paragraphsBreak(text) {
     const paragraphs = text.toLowerCase().split('\n');
-    const resultRepeatedWords = paragraphs.map((text) => 
-        wordRepeatVerifier(text)
-    )
+    const resultRepeatedWords = paragraphs.flatMap((paragraph) => {
+        if(!paragraph) return [];
+        return wordRepeatVerifier(paragraph);
+    })
     console.log(resultRepeatedWords);
 }
 
