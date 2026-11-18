@@ -7,7 +7,10 @@ export function outputText(wordsCounter) {
 
     wordsCounter.forEach((paragraph, index) => {
         const duplicates = ocorrenciesFilter(paragraph).join(', ');
-        finalText += `Palavras duplicadas no parágrafo ${index + 1} ${duplicates} \n`;
+        if (duplicates === '') {
+            return finalText += `Sem palavras duplicadas no parágrafo ${index + 1} \n`;
+        }
+        finalText += `Palavras duplicadas no parágrafo ${index + 1}: ${duplicates} \n`;
     });
 
     return finalText;
